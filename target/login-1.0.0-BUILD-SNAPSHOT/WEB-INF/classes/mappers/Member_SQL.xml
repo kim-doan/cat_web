@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.cat.web.member.dao.MemberDAO">
+
+    <insert id="insert" parameterType="com.cat.web.member.vo.MemberVO">
+        INSERT INTO MEMBER(NO, ID, PASSWORD, NAME, SSNUM, EMAIL, PHONE, ZIPCODE, ADDRESS, SEX)
+        VALUES
+            (AUTONUM.nextval, #{id}, #{password}, #{name}, #{ssnum}, #{email}, #{phone}, #{zipcode}, #{address}, #{sex})
+    </insert>
+    
+	<select id="accountProcess" parameterType="com.cat.web.member.vo.MemberVO" resultType="com.cat.web.member.vo.MemberVO">
+		SELECT ID AS id
+		FROM MEMBER
+		WHERE ID like #{id}
+	</select>
+</mapper>

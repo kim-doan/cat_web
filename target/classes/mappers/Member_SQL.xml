@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.cat.web.member.dao.MemberDAO">
+
+    <insert id="insert" parameterType="com.cat.web.member.vo.MemberVO">
+        INSERT INTO MEMBER(NO, ID, PASSWORD, NAME, SSNUM, EMAIL, PHONE, ZIPCODE, ADDRESS, SEX)
+        VALUES
+            (AUTONUM.nextval, #{id}, #{password}, #{name}, #{ssnum}, #{email}, #{phone}, #{zipcode}, #{address}, #{sex})
+    </insert>
+    
+	<select id="accountProcess" parameterType="com.cat.web.member.vo.MemberVO" resultType="com.cat.web.member.vo.MemberVO">
+		SELECT ID AS id
+		FROM MEMBER
+		WHERE ID like #{id}
+	</select>
+	
+	<select id="loginProcess" parameterType="com.cat.web.member.vo.MemberVO" resultType="com.cat.web.member.vo.MemberVO">
+        SELECT id as ID, password as PASSWORD, name as NAME, address as ADDRESS, phone as PHONE, email as EMAIL, ssnum as SSNUM, sex as SEX
+        FROM MEMBER 
+        WHERE ID = #{id} AND PASSWORD = #{password}
+    </select>
+    
+    <select id="idLook" parameterType="com.cat.web.member.vo.MemberVO" resultType="String">
+    	SELECT id as ID
+    	FROM MEMBER
+    	WHERE NAME = #{name} AND PHONE = #{phone}
+    </select>
+    <update id="update" parameterType="com.cat.web.member.vo.MemberVO">
+    	UPDATE MEMBER SET EMAIL = #{email}, PHONE = #{phone}, ADDRESS = #{address}
+    	WHERE ID = #{id}
+    </update>
+</mapper>
